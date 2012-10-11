@@ -52,8 +52,8 @@ $autoload['packages'] = array(APPPATH.'third_party');
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array();
-
+//$autoload['libraries'] = array();
+$autoload['libraries'] = array('database','session');
 
 /*
 | -------------------------------------------------------------------
@@ -83,6 +83,19 @@ $autoload['helper'] = array();
 $autoload['config'] = array();
 
 
+/* End of file autoload.php */
+/* Location: ./application/config/autoload.php */
+/*
+|--------------------------------------------------------------------------
+| Encryption Key
+|--------------------------------------------------------------------------
+|
+| If you use the Encryption class or the Session class you
+| MUST set an encryption key.  See the user guide for info.
+|
+*/
+$config['encryption_key'] = 'wolftintin';
+
 /*
 | -------------------------------------------------------------------
 |  Auto-load Language files
@@ -110,7 +123,4 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array();
-
-
-/* End of file autoload.php */
-/* Location: ./application/config/autoload.php */
+?>

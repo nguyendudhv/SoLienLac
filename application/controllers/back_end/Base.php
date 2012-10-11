@@ -1,4 +1,4 @@
-<?php if(!define('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Base extends CI_Controller{
     public function __construct()
     {
