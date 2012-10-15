@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php ob_start();if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Account extends CI_Controller{
     
     public function __construct()
@@ -9,22 +9,20 @@ class Account extends CI_Controller{
     }
     public function Index()
     {
-        $msg = 'nguyendudhv';
-        $key = 'du.nguyen@bts.com!!!';
-        $this->load->library('encrypt');
-        $encrypted_string = $this->encrypt->encode($msg, $key);
-        echo $encrypted_string;
-        $this->load->view('back_end/account/index.tpl');
+        //$msg = 'nguyendudhv';
+        //$key = 'du.nguyen@bts.com!!!';
+        //$this->load->library('encrypt');
         //$encrypted_string = $this->encrypt->encode($msg, $key);
-        /*$this->load->library('session');
+        //echo $encrypted_string;
+        //$encrypted_string = $this->encrypt->encode($msg, $key);
+        //$this->load->library('session');
         if($this->session->userdata('User_BackEnd')==null)
         {
           header('location:../account/login');
         }
         else {
-            echo $encrypted_string;
             $this->load->view('back_end/account/index.tpl');
-        }*/
+        }
         
     }
     
@@ -74,4 +72,5 @@ class Account extends CI_Controller{
         }
     }
 }
+ob_end_flush();
 ?>
