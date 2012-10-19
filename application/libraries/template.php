@@ -607,4 +607,5 @@ class Widget extends Partial {
         
         return parent::content();
     }
+} 
 ?>

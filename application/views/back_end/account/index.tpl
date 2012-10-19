@@ -6,6 +6,6 @@
 </head>
 
 <body>
-	<h2>Index function of account controller</h2>
+	<h2><?php echo $Nguyendudhv;?></h2>
 </body>
 </html>

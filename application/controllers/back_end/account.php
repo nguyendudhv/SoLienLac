@@ -24,11 +24,12 @@ class Account extends CI_Controller{
           //redirect('back_end/account/login');
         }
         else {
-            echo "Da login";
-            exit();
+            //echo "Da login";
+            //exit();
             //$this->load->view('back_end/account/index.tpl');
-            $this->load->view('back_end/layout/layout.tpl');
-            
+            $data['Nguyendudhv']='He thong quan li so lien lac dien tu';
+            $this->load->view('back_end/layouts/default/layout.tpl',$data);
+            //$this->load->view('back_end/account/index.tpl');
         }
         
     }

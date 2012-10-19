@@ -3,7 +3,7 @@
                 <div class="content">
                     <div class="logo">
                         <a href="#" title="">
-                            <img src="images/logo.png" alt="logo"/>
+                            <img src="../../images/logo.png" alt="logo"/>
                         </a>
                     </div>
                     
@@ -125,7 +125,7 @@
                         </div>
                         
                         <div class="gird">
-                            content updating...
+                            <?php $this->load->view('back_end/account/index.tpl')?>
                             <div class="cl"></div>
                         </div>
                             
