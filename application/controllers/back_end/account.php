@@ -1,4 +1,4 @@
-<?php ob_start();if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Account extends CI_Controller{
     
     public function __construct()
@@ -16,12 +16,19 @@ class Account extends CI_Controller{
         //echo $encrypted_string;
         //$encrypted_string = $this->encrypt->encode($msg, $key);
         //$this->load->library('session');
-        if($this->session->userdata('User_BackEnd')==null)
+        if($this->session->userdata('Session_User_Login')==null)
         {
-          header('location:../account/login');
+          //header('location:../account/login');
+          echo "Chua login";
+          exit();
+          //redirect('back_end/account/login');
         }
         else {
-            $this->load->view('back_end/account/index.tpl');
+            echo "Da login";
+            exit();
+            //$this->load->view('back_end/account/index.tpl');
+            $this->load->view('back_end/layout/layout.tpl');
+            
         }
         
     }
@@ -41,7 +48,6 @@ class Account extends CI_Controller{
     }
     public  function DoLogin()
     {
-        
         $this->form_validation->set_rules("username", "Username", "trim|required|xss_clean");
         $this->form_validation->set_message('required','Bạn phải nhập tên đăng nhập');//thiet lap tuy chinh thong bao cua validation
         $this->form_validation->set_rules("password","Password","trim|required|xss_clean|callback_check_database");
@@ -50,13 +56,15 @@ class Account extends CI_Controller{
         //$this->form_validation->set_message('password','Bạn phải nhập mật khẩu');
         if($this->form_validation->run() == FALSE)
         {
-          //Field validation failed.  User redirected to login page
-          //$this->load->view("back_end/account/login_view.tpl");
-            header('location:../account/login');
+            $this->load->model('back_end/group_model');
+            $this->load->helper(array('form','url'));
+            $data=array('GroupGetAll'=>$this->group_model->GetAll());
+            $this->load->view("back_end/account/login_view.tpl",$data);
+            //$this->site_url("back_end/account/login");
         }
-        else 
+        else
         {
-            header('location:../account');
+            redirect('back_end/account');
         }
     }
     
@@ -67,10 +75,25 @@ class Account extends CI_Controller{
         {
             if($this->account_model->check_exist_password($password,$username)==TRUE)
             {
-                header('location:../account');
+                $sess_login_arr=array(
+                'AccountId'=>$username,
+                'UserName'=>$username
+                );
+                $this->session->set_userdata('Session_User_Login',$sess_login_arr);
+                //redirect('account','index');
+            }
+            else 
+            {
+                
+                $this->form_validation->set_message('check_database','Người dùng không tồn tại');
+                $this->load->view("back_end/account/login_view.tpl");
             }   
+        }
+        else {
+            $this->form_validation->set_message('check_database','Bạn nhập sai mật khẩu');
+            $this->load->view("back_end/account/login_view.tpl");
         }
     }
 }
-ob_end_flush();
+//ob_end_flush();
 ?>

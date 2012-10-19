@@ -10,9 +10,6 @@ class Account_model extends CI_Model{
     * */
    public function check_exist_username($username)
    {
-       /*$this->db->select('AccountId');
-       $this->db->from('Accounts');
-       $this->db->where('')*/
        $sql = "SELECT * FROM Accounts WHERE UserName = ?";
        $query=$this->db->query($sql,array($username));
        return $query->num_rows()>0?TRUE:FALSE;
@@ -23,11 +20,8 @@ class Account_model extends CI_Model{
     * */
    public function check_exist_password($password,$username)
    {
-       /*$this->db->select('AccountId');
-       $this->db->from('Accounts');
-       $this->db->where('')*/
-       $sql = "SELECT * FROM Accounts WHERE Password = ? AND UserName=?";
-       $query=$this->db->query($sql,array($password,$username));
+       $sql = "SELECT * FROM Accounts WHERE Password = ? AND UserName = ?"; 
+       $query=$this->db->query($sql,array(md5($password),$username));
        return $query->num_rows()>0?TRUE:FALSE;
    }
 }
