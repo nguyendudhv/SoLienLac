@@ -19,20 +19,26 @@ class Account extends CI_Controller{
         if($this->session->userdata('Session_User_Login')==null)
         {
           //header('location:../account/login');
-          echo "Chua login";
-          exit();
-          //redirect('back_end/account/login');
+          redirect('back_end/account/login');
         }
         else {
-            //echo "Da login";
-            //exit();
-            //$this->load->view('back_end/account/index.tpl');
-            $data['Nguyendudhv']='He thong quan li so lien lac dien tu';
+            echo "<div style='display:none'>".$this->account_model->get_All()."</div>";
+            $data['LoadController']='account';
+            $data['LoadAction']='index';
             $this->load->view('back_end/layouts/default/layout.tpl',$data);
             //$this->load->view('back_end/account/index.tpl');
         }
         
     }
+    
+    
+    public function list_accout_ajax()
+    {
+        //header('content-type application/json');
+        echo $this->account_model->get_All();
+        //$this->load->view('back_end/account/index.tpl');
+    }
+    
     
     /*
      *Method account/login
@@ -40,33 +46,51 @@ class Account extends CI_Controller{
      */
     public  function Login()
     {
-        //$this->load->helper("form");
-        $this->load->model('back_end/group_model');
-        $this->load->helper(array('form','url'));
-        $data=array('GroupGetAll'=>$this->group_model->GetAll());
-        $this->load->view("back_end/account/login_view.tpl",$data);
-        //$this->load->view('back_end/group/group_login_view.tpl',$data);
-    }
-    public  function DoLogin()
-    {
-        $this->form_validation->set_rules("username", "Username", "trim|required|xss_clean");
-        $this->form_validation->set_message('required','Bạn phải nhập tên đăng nhập');//thiet lap tuy chinh thong bao cua validation
-        $this->form_validation->set_rules("password","Password","trim|required|xss_clean|callback_check_database");
-        $this->form_validation->set_message('required','Bạn phải nhập mật khẩu');
-        $this->form_validation->set_error_delimiters('<span style="color:red;">', '</span>');//thiet lap mau chu validation
-        //$this->form_validation->set_message('password','Bạn phải nhập mật khẩu');
-        if($this->form_validation->run() == FALSE)
+        if($this->session->userdata('Session_User_Login')!=null)
         {
+            redirect('back_end/account');    
+        }
+        else 
+        {
+	       //$this->load->helper("form");
             $this->load->model('back_end/group_model');
             $this->load->helper(array('form','url'));
             $data=array('GroupGetAll'=>$this->group_model->GetAll());
             $this->load->view("back_end/account/login_view.tpl",$data);
-            //$this->site_url("back_end/account/login");
+            //$this->load->view('back_end/group/group_login_view.tpl',$data);
         }
-        else
+        
+    }
+    
+    
+    public function DoLogin()
+    {
+        if($this->session->userdata('Session_User_Login')!=null)
         {
-            redirect('back_end/account');
+            redirect('back_end/account');    
         }
+        else 
+        {
+            $this->form_validation->set_rules("username", "Username", "trim|required|xss_clean");
+            $this->form_validation->set_message('required','Bạn phải nhập tên đăng nhập');//thiet lap tuy chinh thong bao cua validation
+            $this->form_validation->set_rules("password","Password","trim|required|xss_clean|callback_check_database");
+            $this->form_validation->set_message('required','Bạn phải nhập mật khẩu');
+            $this->form_validation->set_error_delimiters('<span style="color:red;">', '</span>');//thiet lap mau chu validation
+            //$this->form_validation->set_message('password','Bạn phải nhập mật khẩu');
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->load->model('back_end/group_model');
+                $this->load->helper(array('form','url'));
+                $data=array('GroupGetAll'=>$this->group_model->GetAll());
+                $this->load->view("back_end/account/login_view.tpl",$data);
+                //$this->site_url("back_end/account/login");
+            }
+            else
+            {
+                redirect('back_end/account');
+            }
+        }
+        
     }
     
     public function check_database($password)
@@ -86,13 +110,13 @@ class Account extends CI_Controller{
             else 
             {
                 
-                $this->form_validation->set_message('check_database','Người dùng không tồn tại');
-                $this->load->view("back_end/account/login_view.tpl");
+                $this->form_validation->set_message('username','Người dùng không tồn tại');
+                //$this->load->view("back_end/account/login_view.tpl");
             }   
         }
         else {
-            $this->form_validation->set_message('check_database','Bạn nhập sai mật khẩu');
-            $this->load->view("back_end/account/login_view.tpl");
+            $this->form_validation->set_message('password','Bạn nhập sai mật khẩu');
+            //$this->load->view("back_end/account/login_view.tpl");
         }
     }
 }

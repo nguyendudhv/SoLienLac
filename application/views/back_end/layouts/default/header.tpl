@@ -20,11 +20,19 @@
         <!--[if IE 7]>
         <link rel="stylesheet" href="../../css/ie7.css" type="text/css" />
         <![endif]-->
-        
-        <script type="text/javascript" src="../../js/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="../../js/jquery.cycle.all.js"></script>
-        <script type="text/javascript" src="../../js/jQueryRotate.2.2.js"></script>
-
+		<script type="text/javascript" src="../../js/jquery-1.8.2.min.js"></script>
+		
+		<!--script jqwidgets-->
+		<link rel="stylesheet" href="../../css/jqwidgets/jqx.base.css" type="text/css">
+		<link rel="stylesheet" href="../../css/jqwidgets/jqx.classic.css" type="text/css">
+		<script type="text/javascript" src="../../js/jqwidgets/jqxcore.js"></script>
+		<script type="text/javascript" src="../../js/jqwidgets/jqxbuttons.js"></script>
+		<script type="text/javascript" src="../../js/jqwidgets/jqxscrollbar.js"></script>
+		<script type="text/javascript" src="../../js/jqwidgets/jqxmenu.js"></script>
+		<script type="text/javascript" src="../../js/jqwidgets/jqxdata.js"></script>
+		<script type="text/javascript" src="../../js/jqwidgets/jqxgrid.js"></script>
+		<script type="text/javascript" src="../../js/jqwidgets/jqxgrid.selection.js"></script>
+		<!--script jqwidgets--->
         <!-- styles needed by jScrollPane -->
         <link type="text/css" href="../../css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
         <!-- the mousewheel plugin - optional to provide mousewheel support -->

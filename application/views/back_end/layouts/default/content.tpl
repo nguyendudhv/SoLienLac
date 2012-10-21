@@ -99,8 +99,8 @@
                                 <li><a href="" title="">tiểu long nữ</a></li>
                                 <li><a href="" title="">nhạc mất quần</a></li>
                                 <li><a href="" title="">Độc cô cầu bại</a></li>
-                                <li><a href="" title="">Nguyễn thị tuyết</a></li>
-                                <li><a href="" title="">phan nhật minh</a></li>
+                                <li><a href="" title="">Thánh Cô Cô</a></li>
+                                <li><a href="" title="">Lệnh Hồ Xung</a></li>
                             </ul>
                             
                             <div class="cl"></div>
@@ -125,7 +125,7 @@
                         </div>
                         
                         <div class="gird">
-                            <?php $this->load->view('back_end/account/index.tpl')?>
+                            <?php $this->load->view('back_end/'.$LoadController.'/'.$LoadAction.'.tpl')?>
                             <div class="cl"></div>
                         </div>
                             

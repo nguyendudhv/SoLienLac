@@ -31,7 +31,7 @@
        	  	  	<p>Tài Khoản:</p>
        	  	  	<input name="username" class="text_field" type="text" />
        	  	  	<?php echo form_error('username');?>
-                <p>Mật Khẩu:</p><input name="password" class="text_field" type="text" />
+                <p>Mật Khẩu:</p><input name="password" class="text_field" type="password" />
                 <?php echo form_error('password');?>
 				<?php $this->load->view('back_end/group/group_login_view.tpl')?>
                 <input name="remember" type="checkbox" id="checkbox" value="Ghi nh&#7899; &#273;&#259;ng nh&#7853;p" />Ghi nhớ đăng nhập

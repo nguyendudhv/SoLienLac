@@ -4,6 +4,16 @@ class Account_model extends CI_Model{
     {
         parent::__construct();
     }
+    
+    public function get_All()
+    {
+        //$this->db->select('AccountId,UserName,Email');
+        //$this->db->from('Accounts');
+       $sql = "SELECT `AccountID`,`UserName`,`Email` FROM Accounts";
+       $query=$this->db->query($sql);
+       //header("Content-type:application/json");
+       return json_encode($query->result());
+    }
    
    /*
     * Hàm kiểm tra sự tồn tại của username
