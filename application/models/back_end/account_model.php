@@ -52,5 +52,22 @@ class Account_model extends CI_Model{
        $query=$this->db->query($sql,array($Id));
        return $this->db->affected_rows();
    }
+   
+   public function update_by_id($Id='',$UserName,$Email)
+   {
+       if(empty($Id))
+       {
+           $sql = "UPDATE  Accounts SET UserName=?, Email=? WHERE AccountId = ?"; 
+           $query=$this->db->query($sql,array($UserName,$Email,$Id));
+       }
+       else 
+       {
+           $sql = "INSERT INTO  Accounts(`UserName`,`Email`) Values(?,?)"; 
+           $query=$this->db->query($sql,array($UserName,$Email,$Id));
+       }
+       return $this->db->affected_rows();
+   }
+   
+   
 }
 ?>

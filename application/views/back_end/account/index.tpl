@@ -65,11 +65,10 @@
                     
                 },
 				columns: [
-					/*{ text: '', datafield: 'STT', columntype: 'checkbox', width: 40,
+					{ text: '', datafield: 'STT', columntype: 'checkbox', width: 40,
                       renderer: function () {
                           return '<div style="margin-left: 10px; margin-top: 5px;"></div>';
-                      }},*/
-					{ text: 'STT', datafield: 'STT', width: 100 },
+                      }},
 					{ text: 'Tên đăng nhập', datafield: 'UserName', width: 400 },
 					{ text: 'Email', datafield: 'Email', width: 300 },
 					{ text: 'Thao tac', datafield: 'AccountId', cellsrenderer: function () {
@@ -123,13 +122,7 @@
             $("#Save").jqxButton({ theme: 'classic' });
             // update the edited row when the user clicks the 'Save' button.
             $("#Save").click(function () {
-                if (editrow >= 0) {
-                    var row = { firstname: $("#firstName").val(), lastname: $("#lastName").val(), productname: $("#product").val(),
-                        quantity: parseInt($("#quantity").jqxNumberInput('decimal')), price: parseFloat($("#price").jqxNumberInput('decimal'))
-                    };
-                    $('#jqxgrid').jqxGrid('updaterow', editrow, row);
-                    $("#popupWindow").jqxWindow('hide');
-                }
+                
             });
             $("#Cancel").click(function () {
                  $("#popupWindow").jqxWindow('hide');
@@ -142,14 +135,14 @@
  <div id="pager">
  </div>
  <div id="popupWindow">
-            <div>Edit</div>
+            <div>Cập nhập thông tin tài khoản</div>
+            <form id='frmUpdateAccount'>
+            	
+            </form>
             <div style="overflow: hidden;">
                 <table>
                     <tr>
-                        <td align="right">Account Id:</td>
-                        <td align="left"><input id="AccountId" /></td>
-                    </tr>
-                    <tr>
+                    	<input type="hidden" id="AccountId" />
                         <td align="right">Username:</td>
                         <td align="left"><input id="UserName" /></td>
                     </tr>
@@ -159,7 +152,8 @@
                     </tr>
                     <tr>
                         <td align="right"></td>
-                        <td style="padding-top: 10px;" align="right"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" /></td>
+                        <td style="padding-top: 10px;" align="right">
+                        <input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" /></td>
                     </tr>
                 </table>
             </div>
