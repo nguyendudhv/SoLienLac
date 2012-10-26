@@ -29,9 +29,21 @@
 		<script type="text/javascript" src="../../js/jqwidgets/jqxbuttons.js"></script>
 		<script type="text/javascript" src="../../js/jqwidgets/jqxscrollbar.js"></script>
 		<script type="text/javascript" src="../../js/jqwidgets/jqxmenu.js"></script>
-		<script type="text/javascript" src="../../js/jqwidgets/jqxdata.js"></script>
+		<script type="text/javascript" src="../../js/jqwidgets/jqxcheckbox.js"></script>
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxlistbox.js"></script>
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxdropdownlist.js"></script>
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxdata.js"></script>
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxdata.js"></script>
 		<script type="text/javascript" src="../../js/jqwidgets/jqxgrid.js"></script>
 		<script type="text/javascript" src="../../js/jqwidgets/jqxgrid.selection.js"></script>
+		<script type="text/javascript" src="../../js/jqwidgets/jqxgrid.edit.js"></script>
+		<script type="text/javascript" src="../../js/jqwidgets/jqxgrid.pager.js"></script>
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxgrid.sort.js"></script>
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxgrid.filter.js"></script>
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxgrid.columnsresize.js"></script>
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxgrid.selection.js"></script> 
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxpanel.js"></script>
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxwindow.js"></script>
 		<!--script jqwidgets--->
         <!-- styles needed by jScrollPane -->
         <link type="text/css" href="../../css/jquery.jscrollpane.css" rel="stylesheet" media="all" />

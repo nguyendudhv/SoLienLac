@@ -27,7 +27,7 @@
                     
                     <div class="welcome">
                         <a href="#" title="ads">Xin chào:  <span>Nguyễn Xuân Minh</span></a>
-                        <a class="out" href="#" title="adf">Đăng Xuất</a>
+                        <a class="out" href="<?php echo base_url();?>index.php/back_end/account/logout" title="Thoát" onclick="return confirm('Bạn có chắc chắn thoát?')">Đăng Xuất</a>
                     </div>
                     
                     <div class="cl"></div>

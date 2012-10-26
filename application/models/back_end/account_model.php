@@ -9,10 +9,11 @@ class Account_model extends CI_Model{
     {
         //$this->db->select('AccountId,UserName,Email');
         //$this->db->from('Accounts');
-       $sql = "SELECT `AccountID`,`UserName`,`Email` FROM Accounts";
+       $sql = "SELECT `AccountId`,`UserName`,`Email` FROM Accounts";
        $query=$this->db->query($sql);
-       //header("Content-type:application/json");
+       $result=array();
        return json_encode($query->result());
+       //return json_encode($result);
     }
    
    /*
@@ -25,6 +26,16 @@ class Account_model extends CI_Model{
        return $query->num_rows()>0?TRUE:FALSE;
    }
    
+   /*
+    * Hàm kiểm tra sự tồn tại của Id
+    * */
+   public function check_exist_by_id($Id)
+   {
+       $sql = "SELECT * FROM Accounts WHERE AccountId = ?";
+       $query=$this->db->query($sql,array($Id));
+       return $query->num_rows()>0?TRUE:FALSE;
+   }
+   
     /*
     * Hàm kiểm tra sự tồn tại của username
     * */
@@ -33,6 +44,13 @@ class Account_model extends CI_Model{
        $sql = "SELECT * FROM Accounts WHERE Password = ? AND UserName = ?"; 
        $query=$this->db->query($sql,array(md5($password),$username));
        return $query->num_rows()>0?TRUE:FALSE;
+   }
+   
+   public function delete_by_id($Id)
+   {
+       $sql = "DELETE FROM Accounts WHERE AccountId = ?"; 
+       $query=$this->db->query($sql,array($Id));
+       return $this->db->affected_rows();
    }
 }
 ?>
