@@ -11,10 +11,21 @@ class Account_model extends CI_Model{
         //$this->db->from('Accounts');
        $sql = "SELECT `AccountId`,`UserName`,`Email` FROM Accounts";
        $query=$this->db->query($sql);
-       $result=array();
+       //$result=array();
        return json_encode($query->result());
        //return json_encode($result);
     }
+   
+   public function get_all_by_group($groupId='')
+   {
+        //$this->db->select('AccountId,UserName,Email');
+        //$this->db->from('Accounts');
+       $sql = "SELECT `AccountId`,`UserName`,`Email` FROM Accounts";
+       $query=$this->db->query($sql);
+       //$result=array();
+       return json_encode($query->result());
+       //return json_encode($result);
+   }
    
    /*
     * Hàm kiểm tra sự tồn tại của username
@@ -23,6 +34,16 @@ class Account_model extends CI_Model{
    {
        $sql = "SELECT * FROM Accounts WHERE UserName = ?";
        $query=$this->db->query($sql,array($username));
+       return $query->num_rows()>0?TRUE:FALSE;
+   }
+   
+   /*
+    * Hàm kiểm tra sự tồn tại của email
+    * */
+   public function check_exist_email($email)
+   {
+       $sql = "SELECT * FROM Accounts WHERE Email = ?";
+       $query=$this->db->query($sql,array($email));
        return $query->num_rows()>0?TRUE:FALSE;
    }
    
@@ -47,23 +68,32 @@ class Account_model extends CI_Model{
    }
    
    public function delete_by_id($Id)
-   {
-       $sql = "DELETE FROM Accounts WHERE AccountId = ?"; 
-       $query=$this->db->query($sql,array($Id));
-       return $this->db->affected_rows();
+   { 
+       //echo $sql;
+       //$query=$this->db->query($sql,array($Id));
+       //$sql = "DELETE FROM Accounts WHERE AccountId = ?"; 
+       //$query=$this->db->query($sql,array($Id));
+       return $this->db->delete('Accounts', array('AccountId' => $Id));
    }
    
    public function update_by_id($Id='',$UserName,$Email)
    {
        if(!empty($Id))
        {
-           $sql = "UPDATE  Accounts SET `UserName`=?, `Email`=? WHERE `AccountId` = ?"; 
-           $query=$this->db->query($sql,array($UserName,$Email,$Id));
+           $data=array('UserName'=>$UserName,'Email'=>$Email);
+           $where="AccountId=$Id";
+           $sql=$this->db->update_string('Accounts', $data, $where); 
+           //$sql = "UPDATE  Accounts SET `UserName`=?, `Email`=? WHERE `AccountId` = ?"; 
+           $query=$this->db->query($sql);
+           //$query=$this->db->query($sql,array($UserName,$Email,$Id));
        }
        else 
        {
-           $sql = "INSERT INTO  Accounts(`UserName`,`Email`) Values(?,?)"; 
-           $query=$this->db->query($sql,array($UserName,$Email,$Id));
+           $data = array('UserName' => $UserName, 'Email' => $Email);
+           $sql = $this->db->insert_string('Accounts', $data); 
+           //$sql = "INSERT INTO  Accounts(`UserName`,`Email`) Values(?,?)"; 
+           $query=$this->db->query($sql);
+           //$query=$this->db->query($sql,array($UserName,$Email,$Id));
        }
        return $this->db->affected_rows();
    }

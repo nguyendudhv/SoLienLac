@@ -152,7 +152,27 @@ class Account extends CI_Controller{
     
     public function InsertAccount()
     {
-       
+       $username=$_GET['username'];
+       $email=$_GET['email'];
+       if($this->account_model->check_exist_username($username)==TRUE)
+       {
+           echo "0";//Ton tai username
+       }
+       else {
+           if($this->account_model->check_exist_username($username)==TRUE)
+           {
+              echo "1";//Ton tai email 
+           }
+           else {
+               if($this->account_model->update_by_id($Id,$username,$email)==1)
+               {
+                   echo "2";//Thanh cong
+               }
+               else {
+                   echo "-1";//Khong insert duoc
+               }
+           }
+       }
     }
 }
 ?>

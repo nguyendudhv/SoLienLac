@@ -30,7 +30,7 @@
                     var me = this;
                     var container = $("<div style='margin: 5px;'></div>");
                     var span = $("<span style='float: left; margin-top: 5px; margin-right: 4px;'>Nhóm người dùng: </span>");
-                    var input = $("<input class='jqx-input jqx-widget-content jqx-rc-all' id='searchField' type='text' style='height: 23px; float: left; width: 223px;' />");
+                    var input = $("<div id='jqxGroup' style='height: 23px; float: left; width: 223px;'></div>");
                     toolbar.append(container);
                     container.append(span);
                     container.append(input);
@@ -149,21 +149,24 @@
 		            var rowData = $("#jqxgrid_account").jqxGrid('getrowdata',selectedRowsCount);
 	                $.ajax({
 			            //url: '<?php echo base_url();?>/index.php/back_end/account/UpdateAccountById/'+rowData.AccountId+'/'+$('#UserName').val()+'/'+$('#Email').val(),
-			            url: '<?php echo base_url();?>/index.php/back_end/account/UpdateAccountById?id='+rowData.AccountId+'&username='+$('#UserName').val()+'&email='+$('#Email').val(),
+			            url: rowData.AccountId!=0?'<?php echo base_url();?>/index.php/back_end/account/UpdateAccountById?id='+rowData.AccountId+'&username='+$('#UserName').val()+'&email='+$('#Email').val():'<?php echo base_url();?>/index.php/back_end/account/InsertAccount?username='+$('#UserName').val()+'&email='+$('#Email').val(),
 			            type:'POST',
 			            success: function(d){
 			            		if(d=="0")
 			            		{
+			            			$("#popupWindow").jqxWindow('hide');
 			            			alert('Khong ton tai account');
 			            		}
 			            		else if(d=="1")
 			            		{
-			            			alert('Cap nhap thanh cong');
-			            			$("#jqxgrid_account").jqxGrid('updatebounddata');
 			            			$("#popupWindow").jqxWindow('hide');
+			            			$("#jqxgrid_account").jqxGrid('updatebounddata');
+			            			//alert('Cap nhap thanh cong');
+			            			
 			            		}
 			            		else
 			            		{
+			            			$("#popupWindow").jqxWindow('hide');
 			            			alert('Cap nhap khong thanh cong');
 			            		}
 			                } 
@@ -179,7 +182,32 @@
 					rangelength_field: { rangelength: [4,10] } //Chiều dài chuỗi trong khoảng từ 4 - 10 ký tự
 				}
 			});
-			
+			//Bind Group data
+			var sourceGroup =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'GroupId' },
+                        { name: 'GroupName' }
+                    ],
+                    id: 'id',
+                    url: '<?php echo base_url()."index.php/back_end/group/GetAllJson";?>',
+                    async: false
+                };
+                var dataAdapter1 = new $.jqx.dataAdapter(sourceGroup);
+                // Create a jqxDropDownList
+                $("#jqxGroup").jqxDropDownList({ selectedIndex: 0, source: dataAdapter1, displayMember: "GroupName", valueMember: "GroupId", width: 200, autoDropDownHeight: true, theme: 'classic' });
+                $('#jqxGroup').bind('select', function (event) {
+			    var args = event.args;
+			    if (args) {
+			        var index = args.index;
+			        var item = args.item;
+			        var label = item.label;
+			        var value = item.value;
+			    }                        
+			});
+                
+                
         });
 </script>
 <div id="jqxgrid_account">    
