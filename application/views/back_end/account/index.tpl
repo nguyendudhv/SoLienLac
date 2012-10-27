@@ -12,22 +12,35 @@
                 loadComplete: function (data) { },
                 loadError: function (xhr, status, error) { }
             });
+            $("#popupWindow").jqxWindow({  height:150, width: 300, resizable: false, theme: 'classic', autoOpen: false,isModal: true, modalOpacity: 0.3});
 			$("#jqxgrid_account").jqxGrid({
 				source: dataAdapter,
 				theme: 'classic',
 				width: 900,
 				height:400,
                 selectionmode: 'multiplerowsextended',
+                //groupable: true,
+                //groups: ['UserName'],
                 enablehover:true,
                 sortable: true,
                 pageable: true,
                 //autoheight: true,
+                showtoolbar: true,
+                 rendertoolbar: function (toolbar) {
+                    var me = this;
+                    var container = $("<div style='margin: 5px;'></div>");
+                    var span = $("<span style='float: left; margin-top: 5px; margin-right: 4px;'>Nhóm người dùng: </span>");
+                    var input = $("<input class='jqx-input jqx-widget-content jqx-rc-all' id='searchField' type='text' style='height: 23px; float: left; width: 223px;' />");
+                    toolbar.append(container);
+                    container.append(span);
+                    container.append(input);
+                },
                 columnsresize: true,
                 showstatusbar: true,
                 renderstatusbar: function (statusbar) {
                     // appends buttons to the status bar.
                     var container = $("<div style='overflow: hidden; position: relative; margin: 5px;'></div>");
-                    var addButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/add.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Thêm</span></div>");
+                    var addButton = $("<div style='float: left; margin-left: 5px;'><img id='addRow' style='position: relative; margin-top: 2px;' src='../../images/add.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Thêm</span></div>");
                     var deleteButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/close.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Xóa</span></div>");
                     var reloadButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/refresh.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Tải lại</span></div>");
                     var searchButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/search.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Tìm kiếm</span></div>");
@@ -42,8 +55,9 @@
                     searchButton.jqxButton({ theme: 'classic', width: 100, height: 20 });
                     // add new row.
                     addButton.click(function (event) {
-                        var datarow = generatedata(1);
-                        $("#jqxgrid_account").jqxGrid('addrow', null, datarow[0]);
+                    	$('#popupWindow').jqxWindow('setTitle', 'Thêm tài khoản');
+                        $("#popupWindow").jqxWindow('show');
+                        $('input[type=text]').val('');
                     });
                     // delete selected row.
                     deleteButton.click(function (event) {
@@ -80,10 +94,11 @@
                  },
 				]
 			});
-			$("#popupWindow").jqxWindow({  height:150, width: 300, resizable: false, theme: 'classic', autoOpen: false,isModal: true, modalOpacity: 0.3});
+			
 			$('img#editRow').live('click',function(){
 				var offset = $("#jqxgrid_account").offset();
                 $("#popupWindow").jqxWindow({ position: { x: parseInt(offset.left) + 300, y: parseInt(offset.top) + 100} });
+                $('#popupWindow').jqxWindow('setTitle', 'Cập nhập thông tin tài khoản');
 				var selectedRowsCount = $("#jqxgrid_account").jqxGrid('getselectedrowindexes');
                 var rowData = $("#jqxgrid_account").jqxGrid('getrowdata',selectedRowsCount);
                 $('input#AccountId').val(rowData.AccountId);

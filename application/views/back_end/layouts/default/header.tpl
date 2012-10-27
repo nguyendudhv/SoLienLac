@@ -42,6 +42,7 @@
 	    <script type="text/javascript" src="../../js/jqwidgets/jqxgrid.filter.js"></script>
 	    <script type="text/javascript" src="../../js/jqwidgets/jqxgrid.columnsresize.js"></script>
 	    <script type="text/javascript" src="../../js/jqwidgets/jqxgrid.selection.js"></script> 
+	    <script type="text/javascript" src="../../js/jqwidgets/jqxgrid.grouping.js"></script>
 	    <script type="text/javascript" src="../../js/jqwidgets/jqxpanel.js"></script>
 	    <script type="text/javascript" src="../../js/jqwidgets/jqxwindow.js"></script>
 		<!--script jqwidgets--->
