@@ -1,3 +1,5 @@
+<script type="text/javascript" src="../../js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../../js/messages_vi.js"></script>
 <script type="text/javascript" >
 	$(document).ready(function () {            
             var source ={
@@ -78,7 +80,7 @@
                  },
 				]
 			});
-			$("#popupWindow").jqxWindow({  height:150, width: 300, resizable: false, theme: 'classic', isModal: true, autoOpen: false, cancelButton: $("#Cancel"), modalOpacity: 0.01 });
+			$("#popupWindow").jqxWindow({  height:150, width: 300, resizable: false, theme: 'classic', autoOpen: false,isModal: true, modalOpacity: 0.3});
 			$('img#editRow').live('click',function(){
 				var offset = $("#jqxgrid_account").offset();
                 $("#popupWindow").jqxWindow({ position: { x: parseInt(offset.left) + 300, y: parseInt(offset.top) + 100} });
@@ -120,13 +122,48 @@
             
             $("#Cancel").jqxButton({ theme: 'classic' });
             $("#Save").jqxButton({ theme: 'classic' });
-            // update the edited row when the user clicks the 'Save' button.
-            $("#Save").click(function () {
-                
-            });
             $("#Cancel").click(function () {
                  $("#popupWindow").jqxWindow('hide');
             });
+            
+            //Validate form
+            $("#frmUpdateAccount").validate({
+				errorElement: "span", // Định dạng cho thẻ HTML hiện thông báo lỗi
+				submitHandler: function() {
+					var selectedRowsCount = $("#jqxgrid_account").jqxGrid('getselectedrowindexes');
+		            var rowData = $("#jqxgrid_account").jqxGrid('getrowdata',selectedRowsCount);
+	                $.ajax({
+			            //url: '<?php echo base_url();?>/index.php/back_end/account/UpdateAccountById/'+rowData.AccountId+'/'+$('#UserName').val()+'/'+$('#Email').val(),
+			            url: '<?php echo base_url();?>/index.php/back_end/account/UpdateAccountById?id='+rowData.AccountId+'&username='+$('#UserName').val()+'&email='+$('#Email').val(),
+			            type:'POST',
+			            success: function(d){
+			            		if(d=="0")
+			            		{
+			            			alert('Khong ton tai account');
+			            		}
+			            		else if(d=="1")
+			            		{
+			            			alert('Cap nhap thanh cong');
+			            			$("#jqxgrid_account").jqxGrid('updatebounddata');
+			            			$("#popupWindow").jqxWindow('hide');
+			            		}
+			            		else
+			            		{
+			            			alert('Cap nhap khong thanh cong');
+			            		}
+			                } 
+			            }); // End of ajax call
+				},
+				rules: {
+					cpassword: {
+						equalTo: "#password" // So sánh trường cpassword với trường có id là password
+					},
+					min_field: { min: 5 }, //Giá trị tối thiểu
+					max_field: { max : 10 }, //Giá trị tối đa
+					range_field: { range: [4,10] }, //Giá trị trong khoảng từ 4 - 10
+					rangelength_field: { rangelength: [4,10] } //Chiều dài chuỗi trong khoảng từ 4 - 10 ký tự
+				}
+			});
 			
         });
 </script>
@@ -136,26 +173,28 @@
  </div>
  <div id="popupWindow">
             <div>Cập nhập thông tin tài khoản</div>
+            <div style="overflow: hidden;">
             <form id='frmUpdateAccount'>
+	                <table>
+	                    <tr>
+	                    	<input type="hidden" id="AccountId" />
+	                        <td align="right">Username:</td>
+	                        <td align="left"><input id="UserName" type="text" class="required" /></td>
+	                    </tr>
+	                    <tr>
+	                        <td align="right">Email:</td>
+	                        <td align="left"><input id="Email" type="text" class="required email" /></td>
+	                    </tr>
+	                    <tr>
+	                        <td align="right"></td>
+	                        <td style="padding-top: 10px;" align="right">
+	                        <input style="margin-right: 5px;" type="submit" id="Save" value="Save" />
+	                        <input id="Cancel" type="button" value="Cancel" />
+	                        </td>
+	                    </tr>
+	                </table>
             	
             </form>
-            <div style="overflow: hidden;">
-                <table>
-                    <tr>
-                    	<input type="hidden" id="AccountId" />
-                        <td align="right">Username:</td>
-                        <td align="left"><input id="UserName" /></td>
-                    </tr>
-                    <tr>
-                        <td align="right">Email:</td>
-                        <td align="left"><input id="Email" /></td>
-                    </tr>
-                    <tr>
-                        <td align="right"></td>
-                        <td style="padding-top: 10px;" align="right">
-                        <input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" /></td>
-                    </tr>
-                </table>
             </div>
        </div>
 		

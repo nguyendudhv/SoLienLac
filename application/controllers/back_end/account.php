@@ -131,24 +131,19 @@ class Account extends CI_Controller{
     public function UpdateAccountById()
     {
        $Id=$_GET['id'];
+       $username=$_GET['username'];
+       $email=$_GET['email'];
        if($this->account_model->check_exist_by_id($Id)==TRUE)
        {
-            $this->form_validation->set_rules("UserName", "UserName", "trim|required|xss_clean");
-            $this->form_validation->set_message('required','Bạn phải nhập tên đăng nhập');//thiet lap tuy chinh thong bao cua validation
-            $this->form_validation->set_rules("Email","Email","trim|required|xss_clean|valid_email");
-            $this->form_validation->set_message('required','Bạn phải nhập mật khẩu');
-            $this->form_validation->set_error_delimiters('<span style="color:red;">', '</span>');//thiet lap mau chu validation
-            if($this->form_validation->run() == FALSE)
-            {
-                $this->load->model('back_end/group_model');
-                $this->load->helper(array('form','url'));
-                $data=array('GroupGetAll'=>$this->group_model->GetAll());
-                $this->load->view("back_end/account/login_view.tpl",$data);
-            }
-            else
-            {
-                redirect('back_end/account');
-            }
+           //$username=$this->input->post('UserName');
+           //$email=$this->input->post('Email');
+           if($this->account_model->update_by_id($Id,$username,$email)==1)
+           {
+               echo "1";
+           }
+           else {
+               echo "-1";
+           }
        }
        else {
            echo "0";

@@ -55,9 +55,9 @@ class Account_model extends CI_Model{
    
    public function update_by_id($Id='',$UserName,$Email)
    {
-       if(empty($Id))
+       if(!empty($Id))
        {
-           $sql = "UPDATE  Accounts SET UserName=?, Email=? WHERE AccountId = ?"; 
+           $sql = "UPDATE  Accounts SET `UserName`=?, `Email`=? WHERE `AccountId` = ?"; 
            $query=$this->db->query($sql,array($UserName,$Email,$Id));
        }
        else 
