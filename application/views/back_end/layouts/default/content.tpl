@@ -1,9 +1,9 @@
-<div class="wrapper">
+		<div class="wrapper">
             <div id="header">
                 <div class="content">
                     <div class="logo">
                         <a href="#" title="">
-                            <img src="../../images/logo.png" alt="logo"/>
+                            <img src="../../../images/logo.png" alt="logo"/>
                         </a>
                     </div>
                     
@@ -141,6 +141,4 @@
                 </div>
                 
             </div>
-            
-            
         </div>

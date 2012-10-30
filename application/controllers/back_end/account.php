@@ -15,7 +15,7 @@ class Account extends CI_Controller{
           redirect('back_end/account/login');
         }
         else {
-            echo "<div style='display:none'>".$this->account_model->get_All()."</div>";
+            //echo "<div style='display:none'>".$this->account_model->get_All()."</div>";
             $data['LoadController']='account';
             $data['LoadAction']='index';
             $this->load->view('back_end/layouts/default/layout.tpl',$data);

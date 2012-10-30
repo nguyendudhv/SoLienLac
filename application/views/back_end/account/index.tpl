@@ -1,5 +1,5 @@
-<script type="text/javascript" src="../../js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="../../js/messages_vi.js"></script>
+<script type="text/javascript" src="../../../js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../../../js/messages_vi.js"></script>
 <script type="text/javascript" >
 	$(document).ready(function () {            
             var source ={
@@ -40,10 +40,10 @@
                 renderstatusbar: function (statusbar) {
                     // appends buttons to the status bar.
                     var container = $("<div style='overflow: hidden; position: relative; margin: 5px;'></div>");
-                    var addButton = $("<div style='float: left; margin-left: 5px;'><img id='addRow' style='position: relative; margin-top: 2px;' src='../../images/add.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Thêm</span></div>");
-                    var deleteButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/close.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Xóa</span></div>");
-                    var reloadButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/refresh.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Tải lại</span></div>");
-                    var searchButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../images/search.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Tìm kiếm</span></div>");
+                    var addButton = $("<div style='float: left; margin-left: 5px;'><img id='addRow' style='position: relative; margin-top: 2px;' src='../../../images/add.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Thêm</span></div>");
+                    var deleteButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../../images/close.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Xóa</span></div>");
+                    var reloadButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../../images/refresh.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Tải lại</span></div>");
+                    var searchButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='../../../images/search.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Tìm kiếm</span></div>");
                     container.append(addButton);
                     container.append(deleteButton);
                     container.append(reloadButton);
@@ -88,8 +88,8 @@
 					{ text: 'Tên đăng nhập', datafield: 'UserName', width: 400 },
 					{ text: 'Email', datafield: 'Email', width: 300 },
 					{ text: 'Thao tac', datafield: 'AccountId', cellsrenderer: function () {
-					return "<img id='editRow' src='../../images/edit.gif'/ style='cursor:pointer;margin:3px 5px' title=\"Sua\"><img id='deleteRow' src='../../images/delete.gif'/ style='cursor:pointer;margin:3px 5px' title=\"Xoa\"/>";
-                     //return "<img id='editRow' src='../../images/edit.gif'/ style='cursor:pointer;margin:3px 5px' title=\"Sua\"><img id='deleteRow' src='../../images/delete.gif'/ style='cursor:pointer;margin:3px 5px' title=\"Xoa\" onclick=\"return confirm(\'Ban co chac chan xoa hay khong?')\"/>";
+					return "<img id='editRow' src='../../../images/edit.gif'/ style='cursor:pointer;margin:3px 5px' title=\"Sua\"><img id='deleteRow' src='../../../images/delete.gif'/ style='cursor:pointer;margin:3px 5px' title=\"Xoa\"/>";
+                     //return "<img id='editRow' src='../../../images/edit.gif'/ style='cursor:pointer;margin:3px 5px' title=\"Sua\"><img id='deleteRow' src='../../../images/delete.gif'/ style='cursor:pointer;margin:3px 5px' title=\"Xoa\" onclick=\"return confirm(\'Ban co chac chan xoa hay khong?')\"/>";
 	                }
                  },
 				]
